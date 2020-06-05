@@ -177,7 +177,7 @@ function ∇map(cx, f, args...)
   else
     ys, backs = unzip(ys_and_backs)
     ys, function (Δ)
-      Δf_and_args_zipped = map((f, δ) -> f(δ), backs, Δ)
+      Δf_and_args_zipped = map((f, δ) -> f(δ), reverse(backs), reverse(Δ)) |> reverse
       Δf_and_args = unzip(Δf_and_args_zipped)
       Δf = reduce(accum, Δf_and_args[1])
       (Δf, Δf_and_args[2:end]...)
