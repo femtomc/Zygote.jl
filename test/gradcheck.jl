@@ -306,6 +306,10 @@ end
   end
   @test gradtest(foo, 3)
   @test gradient(v -> sum([x for x in v]), [1.1,2.2,3.3]) == ([1, 1, 1],)
+
+  s = 0
+  f(x) = (s += x)
+  gradient(x -> sum(f.(x)), 1:10) == (10:-1:1,)
 end
 
 @testset "sort" begin
